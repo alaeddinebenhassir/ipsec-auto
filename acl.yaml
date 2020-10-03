@@ -1,0 +1,16 @@
+---
+- name: hello
+  hosts: BRANCH_A
+  gather_facts: false
+  connection: local
+
+  tasks:
+  - name: acl management 
+    ios_config:
+      lines:
+        - access-list 102  deny tcp any any eq 80
+        - access-list 102 permit tcp any any eq 443   
+        - access-list 102 permit tcp any any eq 53 
+       
+      before : no ip access-list standard 100
+ 
